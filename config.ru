@@ -1,2 +1,4 @@
-require './app'
-run YourApp
+require './config/environment'
+
+use StudentController
+run ApplicationController

@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'sinatra'
 gem 'sequel'
 gem 'sqlite3'
+gem 'sinatra-reloader'
 
 group :test do
   gem 'rspec'
