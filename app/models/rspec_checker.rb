@@ -37,12 +37,8 @@ class RSpecChecker
     config.instance_variable_set(:@reporter, reporter)
     # RSpec::Core::Runner.run(['my_spec.rb'])
     FileUtils.cd("tmp/#{self.user_name}")
-    Dir.foreach('./spec') do |spec_file|
-      require "./spec/#{spec_file}" if spec_file == "spec_helper.rb"
-      RSpec::Core::Runner.run(["./spec/#{spec_file}"])
-      ap json_formatter.output_hash
-    end
-    #RSpec::Core::Runner.run(["spec/rps_game_spec.rb"])
+    RSpec::Core::Runner.run(["spec/rps_game_spec.rb"])
+    ap json_formatter.output_hash
     # Want RSpec::Core::Runner.autorun to work
     FileUtils.cd("../..")
   end
