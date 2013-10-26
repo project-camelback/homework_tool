@@ -1,3 +1,8 @@
+require 'rspec/core/formatters/json_formatter'
+require 'rspec'
+require 'rspec/core'
+require 'git'
+require 'awesome_print'
 class RSpecChecker
 
   attr_reader :clone_url, :user_name
@@ -20,14 +25,21 @@ class RSpecChecker
   end
 
   def clone_repo
-    FileUtils.mkdir_p(TempDirectory)
-    Git.clone(self.clone_url, "#{TempDirectory}/#{self.user_name}", :path => './')
+    FileUtils.mkdir_p("tmp")
+    Git.clone(self.clone_url, "tmp/#{self.user_name}", :path => './')
   end
 
   def execute_rspec
-    # FileUtils.cd("#{TempDirectory}/#{self.user_name}")
-    # puts  RSpec::Core::Runner.autorun
-    # FileUtils.cd("../..")
+
+    config = RSpec.configuration
+    json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.output)
+    reporter =  RSpec::Core::Reporter.new(json_formatter)
+    config.instance_variable_set(:@reporter, reporter)
+    # RSpec::Core::Runner.run(['my_spec.rb'])
+    FileUtils.cd("tmp/#{self.user_name}")
+    RSpec::Core::Runner.run(["spec/rps_game_spec.rb"])
+    ap json_formatter.output_hash
+    FileUtils.cd("../..")
   end
   
   def parse_rspec_output
@@ -37,3 +49,7 @@ class RSpecChecker
   end
 
 end
+
+t = RSpecChecker.new("https://github.com/manu3569/rps-game-app.git")
+t.clone_repo
+t.execute_rspec
