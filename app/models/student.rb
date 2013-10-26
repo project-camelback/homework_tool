@@ -1,5 +1,3 @@
-class Student
+class Student < Sequel::Model
 
-  
-  
 end
