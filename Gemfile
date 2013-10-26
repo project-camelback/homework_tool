@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'sequel'
 gem 'sqlite3'
 gem 'sinatra-reloader'
+gem 'git'
 
 group :test do
   gem 'rspec'

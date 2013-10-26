@@ -25,5 +25,17 @@ describe RSpecChecker do
   it "should return a hash" do
     expect(rspec_checker.run).to eq(return_hash)
   end
+
+  describe "#clone_repo" do
+
+    context "when no 'temp' directory exists" do
+
+      it "should make a temp directory" do
+        rspec_checker.clone_repo
+        expect(File.exists?(TempDirectory)).to be_true
+      end
+      
+    end
+  end
   
 end

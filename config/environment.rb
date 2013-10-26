@@ -2,6 +2,8 @@ require 'bundler/setup'
 
 ENV['RACK_ENV'] ||= 'development'
 
+TempDirectory = "#{Dir.pwd}/tmp"
+
 db_path = "#{Dir.pwd}/db/homework_tool_#{ENV['RACK_ENV']}.db"
 
 Bundler.require(:default, ENV['RACK_ENV'].to_sym)
