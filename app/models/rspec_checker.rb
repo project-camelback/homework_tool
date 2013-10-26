@@ -25,6 +25,9 @@ class RSpecChecker
   end
 
   def execute_rspec
+    # FileUtils.cd("#{TempDirectory}/#{self.user_name}")
+    # puts  RSpec::Core::Runner.autorun
+    # FileUtils.cd("../..")
   end
   
   def parse_rspec_output

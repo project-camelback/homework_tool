@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'rspec/core'
 
 ENV['RACK_ENV'] ||= 'development'
 
