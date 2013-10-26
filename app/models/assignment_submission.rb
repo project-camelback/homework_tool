@@ -1,0 +1,3 @@
+class AssignmentSubmission
+
+end
