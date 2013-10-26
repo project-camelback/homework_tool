@@ -2,7 +2,7 @@ require 'bundler/setup'
 
 ENV['RACK_ENV'] ||= 'development'
 
-TempDirectory = "#{Dir.pwd}/tmp"
+TempDirectory = "tmp"
 
 db_path = "#{Dir.pwd}/db/homework_tool_#{ENV['RACK_ENV']}.db"
 
