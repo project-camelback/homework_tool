@@ -37,8 +37,13 @@ class RSpecChecker
     config.instance_variable_set(:@reporter, reporter)
     # RSpec::Core::Runner.run(['my_spec.rb'])
     FileUtils.cd("tmp/#{self.user_name}")
-    RSpec::Core::Runner.run(["spec/rps_game_spec.rb"])
-    ap json_formatter.output_hash
+    Dir.foreach('./spec') do |spec_file|
+      require "./spec/#{spec_file}" if spec_file == "spec_helper.rb"
+      RSpec::Core::Runner.run(["./spec/#{spec_file}"])
+      ap json_formatter.output_hash
+    end
+    #RSpec::Core::Runner.run(["spec/rps_game_spec.rb"])
+    # Want RSpec::Core::Runner.autorun to work
     FileUtils.cd("../..")
   end
   
@@ -51,5 +56,4 @@ class RSpecChecker
 end
 
 t = RSpecChecker.new("https://github.com/manu3569/rps-game-app.git")
-t.clone_repo
 t.execute_rspec
