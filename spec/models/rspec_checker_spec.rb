@@ -33,7 +33,7 @@ describe RSpecChecker do
       it "should make a temp directory" do
         rspec_checker.clone_repo
         expect(File.exists?(TempDirectory)).to be_true
-        rspec_checker.execute_rspec
+        #rspec_checker.execute_rspec
       end
 
     end

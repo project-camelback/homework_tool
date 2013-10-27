@@ -1,8 +1,5 @@
 require 'rspec/core/formatters/json_formatter'
-require 'rspec'
-require 'rspec/core'
-require 'git'
-require 'awesome_print'
+
 class RSpecChecker
 
   attr_reader :clone_url, :user_name
