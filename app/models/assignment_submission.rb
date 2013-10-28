@@ -5,7 +5,15 @@ class AssignmentSubmission < Sequel::Model
 
   def evaluate
     t = RSpecChecker.new(self.url)
-    t.run
+    self.update(t.run)
+  end
+
+  def self.evaluate_all(assignment)
+    assignment.assignment_submissions.each do |assn|
+      Process.fork do
+        assn.evaluate
+      end
+    end
   end
 
 end

@@ -4,12 +4,14 @@ Sequel.migration do
       primary_key :id
       foreign_key :student_id, :students
       foreign_key :assignment_id, :assignments
-      DateTime :submission_date
-      Boolean :evaluated
-      Boolean :passed_tests
-      Boolean :failed_tests
-      String :teacher_comments, :size => 5000
-      String :url
+      DateTime    :submission_date
+      Boolean     :evaluated
+      Integer     :passes
+      Integer     :failures
+      Integer     :examples
+      String      :failure_descriptions, :size => 5000
+      String      :teacher_comments, :size => 5000
+      String      :url
     end
   end
 end
