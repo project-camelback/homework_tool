@@ -1,6 +1,11 @@
 class AssignmentSubmission < Sequel::Model
 
   many_to_one :assignment
-  one_to_one :student
+  many_to_one :student
+
+  def evaluate
+    t = RSpecChecker.new(self.url)
+    t.run
+  end
 
 end

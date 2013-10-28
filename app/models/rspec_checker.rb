@@ -1,8 +1,6 @@
-require 'rspec/core/formatters/json_formatter'
-
 class RSpecChecker
 
-  attr_reader :clone_url, :user_name
+  attr_reader :clone_url, :user_name, :rspec_output
 
   def initialize(clone_url)
     @clone_url = clone_url
@@ -10,11 +8,9 @@ class RSpecChecker
   end
 
   def run
-    {
-     :passes => 10,
-     :fails => 0,
-     :coverage => 100
-    }
+    self.clone_repo
+    self.execute_rspec
+    self.parse_rspec_output
   end
 
   def parse_username
@@ -22,31 +18,33 @@ class RSpecChecker
   end
 
   def clone_repo
+    FileUtils.remove_dir("tmp/") if File.exists?("tmp/")
     FileUtils.mkdir_p("tmp")
     Git.clone(self.clone_url, "tmp/#{self.user_name}", :path => './')
   end
 
   def execute_rspec
-
     config = RSpec.configuration
     json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.output)
     reporter =  RSpec::Core::Reporter.new(json_formatter)
     config.instance_variable_set(:@reporter, reporter)
-    # RSpec::Core::Runner.run(['my_spec.rb'])
     FileUtils.cd("tmp/#{self.user_name}")
-    RSpec::Core::Runner.run(["spec/rps_game_spec.rb"])
-    ap json_formatter.output_hash
-    # Want RSpec::Core::Runner.autorun to work
+    RSpec::Core::Runner.run(["./"])
     FileUtils.cd("../..")
+    FileUtils.remove_dir("tmp/")
+    @rspec_output = json_formatter.output_hash
   end
   
   def parse_rspec_output
+    {
+     :examples => @rspec_output[:summary][:example_count],
+     :passes => @rspec_output[:summary][:example_count] - @rspec_output[:summary][:failure_count],
+     :failures => @rspec_output[:summary][:failure_count],
+     :failure_descriptions => @rspec_output[:examples].map {|ex| ex[:full_description] if ex[:status] == 'failed'}.compact
+    } 
   end
 
   def check_coverage
   end
 
 end
-
-# t = RSpecChecker.new("https://github.com/manu3569/rps-game-app.git")
-# t.execute_rspec

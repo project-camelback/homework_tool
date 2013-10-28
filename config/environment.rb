@@ -1,6 +1,7 @@
 require 'bundler/setup'
 require 'rspec/core'
-require 'rspec/core/formatters'
+require 'rspec/core/formatters/json_formatter'
+require 'open-uri'
 
 ENV['RACK_ENV'] ||= 'development'
 

@@ -6,6 +6,9 @@ gem 'sqlite3'
 gem 'sinatra-reloader'
 gem 'git'
 gem 'rspec'
+gem 'pry'
+gem 'awesome_print'
+gem 'oj'
 
 group :test do
   gem 'guard'
