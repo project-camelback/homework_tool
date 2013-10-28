@@ -29,6 +29,7 @@ class RSpecChecker
     reporter =  RSpec::Core::Reporter.new(json_formatter)
     config.instance_variable_set(:@reporter, reporter)
     FileUtils.cd("tmp/#{self.user_name}")
+    system('bundle install')
     RSpec::Core::Runner.run(["./"])
     FileUtils.cd("../..")
     FileUtils.remove_dir("tmp/")

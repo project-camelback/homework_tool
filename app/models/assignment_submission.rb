@@ -10,9 +10,7 @@ class AssignmentSubmission < Sequel::Model
 
   def self.evaluate_all(assignment)
     assignment.assignment_submissions.each do |assn|
-      Process.fork do
-        assn.evaluate
-      end
+      fork {assn.evaluate}
     end
   end
 
