@@ -12,7 +12,6 @@ assignment.assignment_submissions.each do |sub|
   system("ruby bin/evaluate.rb #{sub.id}")
 end
 
-# pull pending
 # specify branch
 # cli
 # student pages

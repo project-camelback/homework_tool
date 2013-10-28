@@ -20,7 +20,13 @@ class RSpecChecker
   def clone_repo
     FileUtils.remove_dir("tmp/") if File.exists?("tmp/")
     FileUtils.mkdir_p("tmp")
-    Git.clone(self.clone_url, "tmp/#{self.user_name}", :path => './')
+    g = Git.clone(self.clone_url, "tmp/#{self.user_name}", :path => './')
+    begin
+      g.checkout()
+    rescue
+      
+    end
+    binding.pry
   end
 
   def execute_rspec
