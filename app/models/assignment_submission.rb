@@ -5,7 +5,7 @@ class AssignmentSubmission < Sequel::Model
 
   def evaluate
     t = RSpecChecker.new(self.url)
-    self.update(t.run)
+    self.update(t.run.merge({:evaluated => true, :evaluation_date => Time.now}))
   end
 
   def self.evaluate_all(assignment)
