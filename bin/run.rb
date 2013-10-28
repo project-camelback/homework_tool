@@ -14,3 +14,6 @@ end
 
 # pull pending
 # specify branch
+# cli
+# student pages
+# admin pages

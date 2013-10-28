@@ -40,6 +40,7 @@ class RSpecChecker
     {
      :examples => @rspec_output[:summary][:example_count],
      :passes => @rspec_output[:summary][:example_count] - @rspec_output[:summary][:failure_count],
+     :pendings => @rspec_output[:summary][:pending_count],
      :failures => @rspec_output[:summary][:failure_count],
      :failure_descriptions => @rspec_output[:examples].select do |example|
         example[:status] == 'failed'
