@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 
 assignment = Assignment.create
-github_fork = GithubForks.new("https://github.com/flatiron-school/rps-game-app.git")
+github_fork = GithubForks.new("git@github.com:flatiron-school/sinatra-rspec-intro-ruby-003.git")
 github_fork.get_forks.each do |fork|
   student = Student.find_or_create(:github_username => fork[:github_username])
   unless AssignmentSubmission.find(:student => student, :assignment => assignment)

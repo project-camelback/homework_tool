@@ -43,7 +43,7 @@ class RSpecChecker
      :failures => @rspec_output[:summary][:failure_count],
      :failure_descriptions => @rspec_output[:examples].select do |example|
         example[:status] == 'failed'
-      end.map {|ex| ex[:full_description]}.join('; ')
+      end.map {|ex| ex[:full_description]}.join(";\n")
     } 
   end
 
