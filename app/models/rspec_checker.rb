@@ -51,5 +51,5 @@ class RSpecChecker
 
 end
 
-t = RSpecChecker.new("https://github.com/manu3569/rps-game-app.git")
-t.execute_rspec
+# t = RSpecChecker.new("https://github.com/manu3569/rps-game-app.git")
+# t.execute_rspec
