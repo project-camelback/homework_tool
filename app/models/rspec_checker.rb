@@ -29,7 +29,9 @@ class RSpecChecker
     reporter =  RSpec::Core::Reporter.new(json_formatter)
     config.instance_variable_set(:@reporter, reporter)
     FileUtils.cd("tmp/#{self.user_name}")
-    system('bundle install')
+    if File.exist?("Gemfile")
+      system('bundle install > /dev/null')
+    end
     RSpec::Core::Runner.run(["./"])
     FileUtils.cd("../..")
     FileUtils.remove_dir("tmp/")
@@ -39,7 +41,7 @@ class RSpecChecker
   def parse_rspec_output
     {
      :examples => @rspec_output[:summary][:example_count],
-     :passes => @rspec_output[:summary][:example_count] - @rspec_output[:summary][:failure_count],
+     :passes => @rspec_output[:summary][:example_count] - @rspec_output[:summary][:failure_count] - @rspec_output[:summary][:pending_count],
      :pendings => @rspec_output[:summary][:pending_count],
      :failures => @rspec_output[:summary][:failure_count],
      :failure_descriptions => @rspec_output[:examples].select do |example|

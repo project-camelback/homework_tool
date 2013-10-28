@@ -4,9 +4,10 @@ Sequel.migration do
       primary_key :id
       foreign_key :student_id, :students
       foreign_key :assignment_id, :assignments
-      DateTime    :submission_date
+      DateTime    :evaluation_date
       Boolean     :evaluated
       Integer     :passes
+      Integer     :pendings
       Integer     :failures
       Integer     :examples
       String      :failure_descriptions, :size => 5000
