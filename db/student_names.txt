@@ -40,3 +40,13 @@ UPDATE students SET first_name='Trevor', last_name='McKendrick' WHERE github_use
 UPDATE students SET first_name='Vinney', last_name='Cavallo' WHERE github_username='vcavallo';
 UPDATE students SET first_name='Patrick', last_name='Janson' WHERE github_username='PHJ45';
 UPDATE students SET first_name='Edina', last_name='Vath' WHERE github_username='EdinaVath';
+
+REPLACE INTO assignments (title,url) VALUES ("Sinatra, RSpec, and Rack::Test", "git@github.com:flatiron-school/sinatra-rspec-intro-ruby-003.git");
+
+REPLACE INTO assignments (title,url) VALUES ("Sinatra XYZZY", "git@github.com:flatiron-school/sinatra-adventure-ruby-003.git");
+
+REPLACE INTO assignments (title,url) VALUES ("Sinatra Pigeon", "git@github.com:flatiron-school/sinatra-pigeon-ruby-003.git");
+
+REPLACE INTO assignments (title,url) VALUES ("Halloween Candy!", "git@github.com:flatiron-school/sinatra-orm-halloween-ruby-003.git");
+
+REPLACE INTO assignments (title,url) VALUES ("Rock, Paper, Scissors", "git@github.com:flatiron-school/rps-game-app.git");
