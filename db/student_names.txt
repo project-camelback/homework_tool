@@ -1,3 +1,4 @@
+UPDATE students SET semester='ruby-003';
 UPDATE students SET first_name='Alex', last_name='Chiu' WHERE github_username='AYC726';
 UPDATE students SET first_name='Brendan', last_name='Manley' WHERE github_username='manleyhimself';
 UPDATE students SET first_name='Raymond', last_name='Gan' WHERE github_username='rayning0';
@@ -9,7 +10,7 @@ UPDATE students SET first_name='Michael', last_name='Polycarpou' WHERE github_us
 UPDATE students SET first_name='Sam', last_name='Yang' WHERE github_username='samtalks';
 UPDATE students SET first_name='Stephanie', last_name='Oh' WHERE github_username='stephaniehoh';
 UPDATE students SET first_name='David', last_name='Bella' WHERE github_username='davidbella';
-UPDATE students SET first_name='Greg', last_name='Eng' WHERE github_username='regeng';
+UPDATE students SET first_name='Greg', last_name='Eng' WHERE github_username='gregeng';
 UPDATE students SET first_name='Mike', last_name='Spangler' WHERE github_username='mikespangler';
 UPDATE students SET first_name='Anders', last_name='Ramsay' WHERE github_username='andersr';
 UPDATE students SET first_name='Emily', last_name='Xie' WHERE github_username='emilyxxie';
@@ -18,11 +19,11 @@ UPDATE students SET first_name='Tiffany', last_name='Peón' WHERE github_usernam
 UPDATE students SET first_name='Amanda', last_name='Himmelstoss' WHERE github_username='ahimmelstoss';
 UPDATE students SET first_name='Bandana', last_name='Kaur Malik' WHERE github_username='BandanaKM';
 UPDATE students SET first_name='Christopher', last_name='Lee' WHERE github_username='Clee681';
-UPDATE students SET first_name='Daniel', last_name='Chang' WHERE github_username='ivanbrennan';
+UPDATE students SET first_name='Daniel', last_name='Chang' WHERE github_username='danielchangNYC';
 UPDATE students SET first_name='Ian', last_name='Miller' WHERE github_username='irmiller22';
 UPDATE students SET first_name='Iris', last_name='Lee' WHERE github_username='irislee';
 UPDATE students SET first_name='James', last_name='Tong' WHERE github_username='jamesjtong';
-UPDATE students SET first_name='Joe', last_name='O\'Conor' WHERE github_username='jnoconor';
+UPDATE students SET first_name='Joe', last_name="O'Conor" WHERE github_username='jnoconor';
 UPDATE students SET first_name='Jeanne', last_name='Roniger' WHERE github_username='jronigr';
 UPDATE students SET first_name='John', last_name='Richardson' WHERE github_username='richardsonjm';
 UPDATE students SET first_name='Josh', last_name='Scaglione' WHERE github_username='J-Scag';
