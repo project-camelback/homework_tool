@@ -1,6 +1,37 @@
 class HomeworkToolCLI
 
-  COMMANDS =[:help, :exit, :assignments, :new, :evaluate, :submissions]
+  COMMANDS =[:help, :exit, :assignments, :new, :evaluate, :submissions, :progress]
+
+
+
+  def progress
+
+    @show_progress_bar = true
+
+    Thread.new do
+      puts ""
+      (0..50).to_a.each do |percentage|
+        #('-\|/'*10).chars.each do |spin|
+        #('┤┘┴└├┌┬┐').chars.each do |spin|
+        #('▁▃▄▅▆▇█▇▆▅▄▃').chars.each do |spin|
+        #('□▧▣').chars.each do |spin|
+        #('ᚆᚇᚈᚉᚊᚉᚈᚇ').chars.each do |spin|
+        ('ᚐᚑᚒᚓᚔᚓᚒᚑ').chars.each do |spin|
+          print (" [#{spin*percentage}".ljust(52," ") + "] #{percentage*2}% \r")
+          $stdout.flush
+          sleep 0.05
+        end
+        break unless @show_progress_bar
+      end
+      print "\n"
+      puts ""
+    end
+  
+    sleep 30
+    @show_progress_bar = false
+
+  end
+
 
   def initialize
     @banner_message = "Welcome to HomeworkTool d(-_-)b"
