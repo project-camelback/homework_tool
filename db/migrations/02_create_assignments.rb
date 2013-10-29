@@ -7,6 +7,7 @@ Sequel.migration do
       DateTime :post_date
       DateTime :due_date
       String   :evaluation_type
+      String   :branch
     end
   end
 end
