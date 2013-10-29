@@ -51,3 +51,5 @@ REPLACE INTO assignments (title,url) VALUES ("Sinatra Pigeon", "git@github.com:f
 REPLACE INTO assignments (title,url) VALUES ("Halloween Candy!", "git@github.com:flatiron-school/sinatra-orm-halloween-ruby-003.git");
 
 REPLACE INTO assignments (title,url) VALUES ("Rock, Paper, Scissors", "git@github.com:flatiron-school/rps-game-app.git");
+
+UPDATE assignments SET branch='master';

@@ -1,7 +1,7 @@
 class RSpecChecker
 
-  attr_accessor :wrong_branch
-  attr_reader :clone_url, :user_name, :rspec_output, :branch, :failed_branch_hash
+  attr_accessor :failure_condition
+  attr_reader :clone_url, :user_name, :rspec_output, :branch, :failure_hash
 
   def initialize(assignment_submission)
     @clone_url = assignment_submission.url
@@ -15,19 +15,23 @@ class RSpecChecker
     self.parse_rspec_output
   end
 
-  def wrong_branch?
-    self.wrong_branch
+  def failure_condition?
+    self.failure_condition
+  end
+
+  def remove_user_directory
+    FileUtils.remove_dir("tmp/#{self.user_name}") if File.exists?("tmp/#{self.user_name}")
   end
 
   def clone_repo
-    FileUtils.remove_dir("tmp/") if File.exists?("tmp/")
+    remove_user_directory
     FileUtils.mkdir_p("tmp")
     g = Git.clone(self.clone_url, "tmp/#{self.user_name}", :path => './')
     begin
       g.checkout(self.branch)
     rescue
-      self.wrong_branch = true
-      @failed_branch_hash = { :failure_descriptions => "Couldn't find '#{self.branch}' branch. Please resubmit."}
+      self.failure_condition = true
+      @failure_hash = { :failure_descriptions => "Couldn't find '#{self.branch}' branch. Please resubmit."}
     end
   end
 
@@ -38,17 +42,28 @@ class RSpecChecker
     config.instance_variable_set(:@reporter, reporter)
     FileUtils.cd("tmp/#{self.user_name}")
     if File.exist?("Gemfile")
+      puts "#{self.user_name}: before bundle install"
       system('bundle install > /dev/null')
+      puts "#{self.user_name}: after bundle install"
     end
-    RSpec::Core::Runner.run(["./"])
-    FileUtils.cd("../..")
-    FileUtils.remove_dir("tmp/")
-    @rspec_output = json_formatter.output_hash
+    puts "#{self.user_name}: before running RSpec"
+    begin
+      RSpec::Core::Runner.run(["./"])
+      puts "#{self.user_name}: after running RSpec"
+      @rspec_output = json_formatter.output_hash
+    rescue Exception => e
+      self.failure_condition = true
+      @failure_hash = { :failure_descriptions => "Unable to run RSpec: #{e.message}" }
+      puts "#{self.user_name}: RSpec failed."
+    ensure
+      FileUtils.cd("../..")
+      remove_user_directory
+    end
   end
   
   def parse_rspec_output
-    if wrong_branch?
-      self.failed_branch_hash
+    if failure_condition?
+      self.failure_hash
     else
       {
        :examples => @rspec_output[:summary][:example_count],

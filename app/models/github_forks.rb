@@ -14,7 +14,7 @@ class GithubForks
     json = Oj.load(open(api_url, "Authorization" => "token c8893b4ef96cf423f3fe52d01c8f312beb76230e"))
     clones = json.map do |clone|
       { :github_username => clone["owner"]["login"],
-        :url => clone["ssh_url"]
+        :url => clone["clone_url"]
       }
     end
   end

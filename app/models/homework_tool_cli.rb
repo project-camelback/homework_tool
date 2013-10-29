@@ -1,6 +1,12 @@
 class HomeworkToolCLI
 
-  COMMANDS =[:help, :exit, :assignments, :new, :evaluate, :submissions, :progress]
+  COMMANDS =[:help, :exit, :assignments, :new, :evaluate, :submissions]
+
+  def initialize
+    @banner_message = "Welcome to HomeworkTool d(-_-)b"
+    @prompt         = "#> "   
+    @percentage     = 100
+  end
 
   def new
     puts "Create New Assignment"
@@ -24,38 +30,29 @@ class HomeworkToolCLI
   end
 
 
-  def progress
+  def progress_bar_start
 
-    @show_progress_bar = true
-
+    @width = 60
     Thread.new do
       puts ""
-      (0..50).to_a.each do |percentage|
+      loop do
         #('-\|/'*10).chars.each do |spin|
         #('┤┘┴└├┌┬┐').chars.each do |spin|
         #('▁▃▄▅▆▇█▇▆▅▄▃').chars.each do |spin|
         #('□▧▣').chars.each do |spin|
         #('ᚆᚇᚈᚉᚊᚉᚈᚇ').chars.each do |spin|
         ('ᚐᚑᚒᚓᚔᚓᚒᚑ').chars.each do |spin|
-          print (" [#{spin*percentage}".ljust(52," ") + "] #{percentage*2}% \r")
+          length = @percentage*@width/100
+          print (" [#{spin*length}".ljust(@width+2," ") + "] #{@percentage}% \r")
           $stdout.flush
           sleep 0.05
         end
-        break unless @show_progress_bar
+        break if @percentage == 100
       end
       print "\n"
       puts ""
     end
-  
-    sleep 30
-    @show_progress_bar = false
-
-  end
-
-
-  def initialize
-    @banner_message = "Welcome to HomeworkTool d(-_-)b"
-    @prompt         = "#> "    
+    
   end
 
   def run
@@ -86,7 +83,7 @@ class HomeworkToolCLI
     if assignment = Assignment[assignment_id]
       assignment.assignment_submissions.each do |sub|
         puts "#{sub.student.first_name} #{sub.student.last_name}:"
-        puts " └──> Passes: %s  Failures: %s  Pending: %s" % [sub.passes.to_s.red, sub.failures.to_s.green, sub.pendings.to_s.yellow]
+        puts " └──> Passes: %s  Failures: %s  Pending: %s" % [sub.passes.to_s.green, sub.failures.to_s.red, sub.pendings.to_s.yellow]
       end
     else
       puts "Assignment ID not found!"
@@ -100,7 +97,15 @@ class HomeworkToolCLI
     if assignment = Assignment[assignment_id]
       assignment.pull_submissions
       AssignmentSubmission.evaluate_all(assignment)
-      # TODO: Progress bar
+      
+      @percentage = 0
+      progress_bar_start
+      while @percentage < 100
+        @percentage = AssignmentSubmission.percent_evaluated(assignment)
+        sleep 0.05
+      end
+      sleep 1
+      puts ""
       puts "#{assignment.assignment_submissions.count} assignments evaluated."
     else
       puts "Assignment ID not found!"
