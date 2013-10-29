@@ -5,7 +5,7 @@ class RSpecChecker
 
   def initialize(assignment_submission)
     @clone_url = assignment_submission.url
-    @user_name = parse_username
+    @user_name = assignment_submission.student.github_username
     @branch = assignment_submission.assignment.branch
   end
 
@@ -17,10 +17,6 @@ class RSpecChecker
 
   def wrong_branch?
     self.wrong_branch
-  end
-
-  def parse_username
-    self.clone_url.match(/https?:\/\/github.com\/([^\/]+)/)[1]
   end
 
   def clone_repo

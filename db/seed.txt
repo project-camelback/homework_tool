@@ -1,0 +1,53 @@
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Alex', 'Chiu', 'AYC726');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Brendan', 'Manley', 'manleyhimself');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Raymond', 'Gan', 'rayning0');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Charlotte', 'Chang', 'glamouracademy');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Vivian', 'Shangxuan Zhang', 'casunlight');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Ivan', 'Brennan', 'ivanbrennan');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Kyle', 'Shike', 'kyleshike');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Michael', 'Polycarpou', 'polycarpou');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Sam', 'Yang', 'samtalks');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Stephanie', 'Oh', 'stephaniehoh');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('David', 'Bella', 'davidbella');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Greg', 'Eng', 'gregeng');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Mike', 'Spangler', 'mikespangler');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Anders', 'Ramsay', 'andersr');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Emily', 'Xie', 'emilyxxie');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Matt', 'Campbell', 'mecampbellsoup');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Tiffany', 'Peón', 'tiffanypeon');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Amanda', 'Himmelstoss', 'ahimmelstoss');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Bandana', 'Kaur Malik', 'BandanaKM');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Christopher', 'Lee', 'Clee681');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Daniel', 'Chang', 'danielchangNYC');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Ian', 'Miller', 'irmiller22');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Iris', 'Lee', 'irislee');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('James', 'Tong', 'jamesjtong');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Joe', "O'Conor", 'jnoconor');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Jeanne', 'Roniger', 'jronigr');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('John', 'Richardson', 'richardsonjm');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Josh', 'Scaglione', 'J-Scag');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Logan', 'Hasson', 'loganhasson');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Manuel', 'Neuhauser', 'manu3569');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Margaret', 'Lee', 'margaretleedees2');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Rosie', 'Hoyem', 'rosiehoyem');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Sam', 'Owens', 'samueldowens');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Saron', 'Yitbarek', 'sarony');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Scott', 'Luptowski', 'scottluptowski');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Sonja', 'Hall', 'sonejah21');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Theo', 'Vora', 'theevo');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Trevor', 'McKendrick', 'TrevMcKendrick');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Vinney', 'Cavallo', 'vcavallo');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Patrick', 'Janson', 'PHJ45');
+INSERT INTO students (first_name, last_name, github_username) VALUES ('Edina', 'Vath', 'EdinaVath');
+
+UPDATE students SET semester='ruby-003';
+
+REPLACE INTO assignments (title,url) VALUES ("Sinatra, RSpec, and Rack::Test", "git@github.com:flatiron-school/sinatra-rspec-intro-ruby-003.git");
+
+REPLACE INTO assignments (title,url) VALUES ("Sinatra XYZZY", "git@github.com:flatiron-school/sinatra-adventure-ruby-003.git");
+
+REPLACE INTO assignments (title,url) VALUES ("Sinatra Pigeon", "git@github.com:flatiron-school/sinatra-pigeon-ruby-003.git");
+
+REPLACE INTO assignments (title,url) VALUES ("Halloween Candy!", "git@github.com:flatiron-school/sinatra-orm-halloween-ruby-003.git");
+
+REPLACE INTO assignments (title,url) VALUES ("Rock, Paper, Scissors", "git@github.com:flatiron-school/rps-game-app.git");

@@ -1,4 +1,9 @@
-#task :default => [:test]
+task :default => [:cli]
+
+task :cli do
+  require_relative 'config/environment'
+  HomeworkToolCLI.new.run
+end
 
 namespace :db do
   task :reload do

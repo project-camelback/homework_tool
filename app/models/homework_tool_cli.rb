@@ -18,7 +18,7 @@ class HomeworkToolCLI
 
     puts ""
 
-    if ["","y"].include?(input("Save assignment? [Y/n]").downcase)
+    if ["","y"].include?(input("Save assignment? [Y/n] ").downcase)
       Assignment.create(new_assignment)
     end
   end
@@ -120,11 +120,13 @@ class HomeworkToolCLI
   end
 
   def help
-    puts (["The most commonly used Jukebox commands are:",
-           "   play <song|index>  Play specified song",
-           "   list               List all songs that can be played",
-           "   help               Display the list of accepted commands",
-           "   exit               Exit the jukebox application"]).join("\n")
+    puts (["The most commonly used homework tool commands are:",
+           "  new            Create a new assignment",
+           "  assignments    List all assignments",
+           "  submissions    List all submissions",
+           "  evaluate       Evaluate all submissions for an assignment",
+           "  help           Display the list of accepted commands",
+           "  exit           Exit the application"]).join("\n")
   end
 
 
