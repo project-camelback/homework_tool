@@ -35,9 +35,22 @@ class HomeworkToolCLI
     if assignment = Assignment[assignment_id]
       assignment.assignment_submissions.each do |sub|
         puts "#{sub.student.first_name} #{sub.student.last_name}:"
-        puts " └──> Passes: %s  Failures: %s  Pending: %s" % [sub.passes, sub.failures, sub.pendings]
-        puts ""
+        puts " └──> Passes: %s  Failures: %s  Pending: %s" % [sub.passes.to_s.red, sub.failures.to_s.green, sub.pendings.to_s.yellow]
       end
+    else
+      puts "Assignment ID not found!"
+    end
+  end
+
+  def evaluate
+    assignments
+    print "Enter assignment ID: " 
+    assignment_id = input("").strip
+    if assignment = Assignment[assignment_id]
+      assignment.pull_submissions
+      AssignmentSubmission.evaluate_all(assignment)
+      # TODO: Progress bar
+      puts "#{assignment.assignment_submissions.count} assignments evaluated."
     else
       puts "Assignment ID not found!"
     end
