@@ -11,6 +11,7 @@ gem 'awesome_print'
 gem 'oj'
 gem 'chronic'
 gem 'colorize'
+gem 'rake'
 
 group :test do
   gem 'guard'
