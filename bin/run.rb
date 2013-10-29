@@ -1,6 +1,6 @@
 require_relative '../config/environment'
 
-assignment = Assignment.create(:branch => 'solution')
+assignment = Assignment.create(:branch => 'master')
 github_fork = GithubForks.new("git@github.com:flatiron-school/sinatra-rspec-intro-ruby-003.git")
 github_fork.get_forks.each do |fork|
   student = Student.find_or_create(:github_username => fork[:github_username])
