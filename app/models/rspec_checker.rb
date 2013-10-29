@@ -1,16 +1,22 @@
 class RSpecChecker
 
-  attr_reader :clone_url, :user_name, :rspec_output
+  attr_accessor :wrong_branch
+  attr_reader :clone_url, :user_name, :rspec_output, :branch, :failed_branch_hash
 
-  def initialize(clone_url)
-    @clone_url = clone_url
+  def initialize(assignment_submission)
+    @clone_url = assignment_submission.url
     @user_name = parse_username
+    @branch = assignment_submission.assignment.branch
   end
 
   def run
     self.clone_repo
     self.execute_rspec
     self.parse_rspec_output
+  end
+
+  def wrong_branch?
+    self.wrong_branch
   end
 
   def parse_username
@@ -20,7 +26,13 @@ class RSpecChecker
   def clone_repo
     FileUtils.remove_dir("tmp/") if File.exists?("tmp/")
     FileUtils.mkdir_p("tmp")
-    Git.clone(self.clone_url, "tmp/#{self.user_name}", :path => './')
+    g = Git.clone(self.clone_url, "tmp/#{self.user_name}", :path => './')
+    begin
+      g.checkout(self.branch)
+    rescue
+      self.wrong_branch = true
+      @failed_branch_hash = { :failure_descriptions => "Couldn't find '#{self.branch}' branch. Please resubmit."}
+    end
   end
 
   def execute_rspec
@@ -39,15 +51,19 @@ class RSpecChecker
   end
   
   def parse_rspec_output
-    {
-     :examples => @rspec_output[:summary][:example_count],
-     :passes => @rspec_output[:summary][:example_count] - @rspec_output[:summary][:failure_count] - @rspec_output[:summary][:pending_count],
-     :pendings => @rspec_output[:summary][:pending_count],
-     :failures => @rspec_output[:summary][:failure_count],
-     :failure_descriptions => @rspec_output[:examples].select do |example|
-        example[:status] == 'failed'
-      end.map {|ex| ex[:full_description]}.join(";\n")
-    } 
+    if wrong_branch?
+      self.failed_branch_hash
+    else
+      {
+       :examples => @rspec_output[:summary][:example_count],
+       :passes => @rspec_output[:summary][:example_count] - @rspec_output[:summary][:failure_count] - @rspec_output[:summary][:pending_count],
+       :pendings => @rspec_output[:summary][:pending_count],
+       :failures => @rspec_output[:summary][:failure_count],
+       :failure_descriptions => @rspec_output[:examples].select do |example|
+          example[:status] == 'failed'
+        end.map {|ex| ex[:full_description]}.join(";\n")
+      }
+    end 
   end
 
   def check_coverage
