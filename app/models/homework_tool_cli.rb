@@ -2,6 +2,26 @@ class HomeworkToolCLI
 
   COMMANDS =[:help, :exit, :assignments, :new, :evaluate, :submissions, :progress]
 
+  def new
+    puts "Create New Assignment"
+    puts "====================="
+    puts ""
+
+    new_assignment = {
+      title: input("Title: "),
+      description: input("Description: "),
+      post_date: Chronic.parse(input("Post Date: ")),
+      due_date: Chronic.parse(input("Due Date: ")),
+      url: input("Github URL: "),
+      branch: input("Branch: ")
+    }
+
+    puts ""
+
+    if ["","y"].include?(input("Save assignment? [Y/n]").downcase)
+      Assignment.create(new_assignment)
+    end
+  end
 
 
   def progress
@@ -49,7 +69,7 @@ class HomeworkToolCLI
 
   def input(prompt = @prompt)
     print prompt 
-    gets.chomp.strip.downcase
+    gets.chomp.strip
   end
 
   def assignments
