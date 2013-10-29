@@ -32,7 +32,7 @@ UPDATE students SET first_name='Manuel', last_name='Neuhauser' WHERE github_user
 UPDATE students SET first_name='Margaret', last_name='Lee' WHERE github_username='margaretleedees2';
 UPDATE students SET first_name='Rosie', last_name='Hoyem' WHERE github_username='rosiehoyem';
 UPDATE students SET first_name='Sam', last_name='Owens' WHERE github_username='samueldowens';
-UPDATE students SET first_name='Student', last_name='Name' WHERE github_username='sarony';
+UPDATE students SET first_name='Saron', last_name='Yitbarek' WHERE github_username='sarony';
 UPDATE students SET first_name='Scott', last_name='Luptowski' WHERE github_username='scottluptowski';
 UPDATE students SET first_name='Sonja', last_name='Hall' WHERE github_username='sonejah21';
 UPDATE students SET first_name='Theo', last_name='Vora' WHERE github_username='theevo';

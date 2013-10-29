@@ -10,6 +10,7 @@ gem 'pry'
 gem 'awesome_print'
 gem 'oj'
 gem 'chronic'
+gem 'colorize'
 
 group :test do
   gem 'guard'
