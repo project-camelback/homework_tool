@@ -93,10 +93,16 @@ class HomeworkToolCLI
     print "Enter assignment ID: " 
     assignment_id = input("").strip
     if assignment = Assignment[assignment_id]
+      # assignment.assignment_submissions.each do |sub|
+      #   puts "#{sub.student.first_name} #{sub.student.last_name}:"
+      #   puts " └──> Passes: %s  Failures: %s  Pending: %s" % [sub.passes.to_s.green, sub.failures.to_s.red, sub.pendings.to_s.yellow]
+      # end
       assignment.assignment_submissions.each do |sub|
-        puts "#{sub.student.first_name} #{sub.student.last_name}:"
-        puts " └──> Passes: %s  Failures: %s  Pending: %s" % [sub.passes.to_s.green, sub.failures.to_s.red, sub.pendings.to_s.yellow]
+        print "#{sub.student.first_name} #{sub.student.last_name}".ljust(30)
+        puts  [sub.passes, sub.failures, sub.pendings].map {|r| r.to_s.rjust(4,'.')}.join("----")
+        binding.pry
       end
+
     else
       puts "Assignment ID not found!"
     end
