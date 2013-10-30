@@ -50,6 +50,9 @@
 
     <div class="container theme-showcase">
       <div class="page-header">
+        <form action="/assignment_submissions/#" method="POST">
+        <input type="submit" class="btn btn-default test-btn" value="Reload"/>
+        </form><br>
         <h1><%= @student.first_name %> <%= @student.last_name %></h1>
         <!-- <form action="/assignment_submissions/#/" method="POST">
           <input type="submit" class="btn btn-default test-btn" value="Evaluate"/>
@@ -66,7 +69,7 @@
       
         <form action="/assignment_submissions/<%= AssignmentSubmission.where(:student => @student, :assignment => assignment).first.id %>" method="POST">
           <input type="submit" class="btn btn-default test-btn" value="Evaluate"/>
-          </form><br>
+        </form><br>
           <!-- <button type="button" class="btn btn-default">Evaluate method goes here</button> -->
       <!-- <button type="button" class="btn btn-default test-btn">Test</button> -->
       <h2 class="assignment"><%= assignment.title %><br></h2>

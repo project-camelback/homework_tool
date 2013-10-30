@@ -79,6 +79,7 @@ class StudentController < ApplicationController
 
   post '/admin/assignments/evaluate' do
     assignment = Assignment[params[:id]]
+    assignment.pull_submissions
     AssignmentSubmission.evaluate_all(assignment)
     redirect "/admin/assignments/#{params[:id]}/submissions"
   end
