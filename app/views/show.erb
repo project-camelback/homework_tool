@@ -14,7 +14,7 @@
     <link href="/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap theme -->
     <link href="/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/assets/css/custom.css">
     <!-- Custom styles for this template -->
 <!--     <link href="/theme.css" rel="stylesheet"> -->
 
@@ -60,7 +60,8 @@
       </div>
       <% @assignment_array.each do |assignment| %>
       <% if assignment.assignment_submissions.map {|s| s.student_id}.include?(@student.id) %>
-      <h2 class="assignment"><%= assignment.title %><button type="button" class="btn btn-default">Test</button><br></h2>
+      <button type="button" class="btn btn-default test-btn">Test</button>
+      <h2 class="assignment"><%= assignment.title %><br></h2>
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-success">
@@ -99,9 +100,9 @@
       </div>
       <% else %>
 
-      <!---GREY STUFF -->
-
-      <h2 class="assignment"><%= assignment.title %><button type="button" class="btn btn-default">Test</button></h2>
+      <!--- GREY STUFF -->
+      <button type="button" class="btn btn-default test-btn">Test</button>
+      <h2 class="assignment"><%= assignment.title %></h2>
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-default">
