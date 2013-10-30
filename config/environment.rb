@@ -14,4 +14,7 @@ Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 Sequel.connect("sqlite://#{db_path}")
 
 Dir[File.join(File.dirname(__FILE__), "../app/models", "*.rb")].each {|f| require f}
-Dir[File.join(File.dirname(__FILE__), "../app/controllers", "*.rb")].each {|f| require f}
+
+require_relative '../app/controllers/application_controller.rb'
+require_relative '../app/controllers/student_controller.rb'
+ 
