@@ -32,13 +32,13 @@ class HomeworkToolCLI
   def p
     @percentage = 0
     progress_bar_start
+    sleep 5
     (1..100).each do |per|
       @percentage = per
-      sleep 0.03
+      sleep 0.08
     end
     sleep 1
   end
-
 
   def progress_bar_start
 
@@ -47,15 +47,17 @@ class HomeworkToolCLI
       puts ""
       loop do
         progress_length = @percentage*@width/100
-        #('-\|/'*10).chars.each do |spin|
-        #('┤┘┴└├┌┬┐').chars.each do |spin|
-        #('▁▃▄▅▆▇█▇▆▅▄▃').chars.each do |spin|
-        #('□▧▣').chars.each do |spin|
-        #('ᚆᚇᚈᚉᚊᚉᚈᚇ').chars.each do |spin|
-        ('ᚐᚑᚒᚓᚔᚓᚒᚑ').chars.each do |spin|
-          print (" [#{spin*progress_length}".ljust(@width+2," ") + "] #{@percentage}%    \r")
-          $stdout.flush
-          sleep 0.05
+        if @percentage == 0
+          4.times do |dots|
+            print (" [" + ("Loading#{'.'*dots}".ljust(10).center(@width)) + "] #{@percentage}%    \r")
+            sleep 0.2
+          end
+        else
+          ('ᚐᚑᚒᚓᚔᚓᚒᚑ').chars.each do |spin|
+            print (" [#{spin*progress_length}".ljust(@width+2," ") + "] #{@percentage}%    \r")
+            $stdout.flush
+            sleep 0.02
+          end
         end
         break if @width == progress_length
       end
@@ -112,7 +114,7 @@ class HomeworkToolCLI
       progress_bar_start
       while @percentage < 100
         @percentage = AssignmentSubmission.percent_evaluated(assignment)
-        sleep 0.05
+        sleep 0.02
       end
       sleep 1
       puts ""
