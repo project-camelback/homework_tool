@@ -10,33 +10,40 @@ class AssignmentSubmission < Sequel::Model
   end
 
   def grader_command
-    "bash bin/grader.sh %s %s %s" % [github_username, self.url, self.assignment.branch]
+    "bash bin/grader.sh %s %s %s &> /dev/null" % [github_username, self.url, self.assignment.branch]
   end
 
   def results_file
     "tmp/#{self.github_username}/.rspec-results.json"
   end
 
-  def evaluate
-    puts "EXECUTING: #{grader_command}".red
+  def errors_file
+    "tmp/#{self.github_username}/.rspec-results.errors"
+  end
 
+  def evaluate
     system(grader_command)
     results = File.read(results_file)
-    FileUtils.rm_r("tmp/#{github_username}")
-    results_json = Oj.load(results, symbol_keys: true)
+    assignment_submissions_hash = if results.empty?
+      {:failure_descriptions => File.read(errors_file),
+       :evaluated => true, :evaluation_date => Time.now
+      }
+    else
+      results_json = Oj.load(results, symbol_keys: true)
 
-    assignment_submissions_hash = {
-      :evaluated => true, :evaluation_date => Time.now,
-      :examples => results_json[:summary][:example_count],
-      :passes => results_json[:summary][:example_count] - results_json[:summary][:failure_count] - results_json[:summary][:pending_count],
-      :pendings => results_json[:summary][:pending_count],
-      :failures => results_json[:summary][:failure_count],
-      :failure_descriptions => results_json[:examples].select do |example|
-        example[:status] == 'failed'
-      end.map {|ex| ex[:full_description]}.join(";")
-    }
-
+      {
+        :evaluated => true, :evaluation_date => Time.now,
+        :examples => results_json[:summary][:example_count],
+        :passes => results_json[:summary][:example_count] - results_json[:summary][:failure_count] - results_json[:summary][:pending_count],
+        :pendings => results_json[:summary][:pending_count],
+        :failures => results_json[:summary][:failure_count],
+        :failure_descriptions => results_json[:examples].select do |example|
+          example[:status] == 'failed'
+        end.map {|ex| ex[:full_description]}.join(";")
+      }
+    end
     self.update(assignment_submissions_hash)
+    FileUtils.rm_r("tmp/#{github_username}")
   end
 
   def self.evaluate_all(assignment)

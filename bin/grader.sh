@@ -16,7 +16,5 @@ git checkout $3
 if [ -a Gemfile ] ; then
   bundle install --verbose
 fi
-pwd
-# future use: 
 
-bundle exec rspec --format json --out .rspec-results.json --require ../../rspec_setup.rb
+bundle exec rspec --format json --out .rspec-results.json --require ../../rspec_setup.rb &> .rspec-results.errors
