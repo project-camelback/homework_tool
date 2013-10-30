@@ -66,18 +66,25 @@ class StudentController < ApplicationController
   end
 
  	get '/admin/eval' do
- 		@assignments = Assignment.all
+ 		@assignments = Assignment.all.reverse
   	erb :eval
   end
 
   post '/admin/assignments' do
-  	@assignment = Assignment.create(params)
+    params[:assignment][:post_date] = Chronic.parse(params[:assignment][:post_date])
+    params[:assignment][:due_date] = Chronic.parse(params[:assignment][:due_date])
+  	@assignment = Assignment.create(params[:assignment])
   	redirect "/admin/eval"
+  end
+
+  post '/admin/assignments/evaluate' do
+    assignment = Assignment[params[:id]]
+    AssignmentSubmission.evaluate_all(assignment)
+    redirect "/admin/assignments/#{params[:id]}/submissions"
   end
 
  	get '/admin/assignments/:id/submissions' do
  		@assignment = Assignment[params[:id].to_i]
- 		binding.pry
   	erb :submissions
   end
 
