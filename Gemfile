@@ -12,7 +12,6 @@ gem 'oj'
 gem 'chronic'
 gem 'colorize'
 gem 'rake'
-gem 'capybara'
 
 group :test do
   gem 'guard'
