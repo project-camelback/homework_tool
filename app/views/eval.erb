@@ -1,15 +1,15 @@
+<!-- form for admin to add new assignment -->
 <!DOCTYPE html>
- <html>
- <head>
-     <meta charset="utf-8">
-     <title>Getting started with Bootstrap</title>
-      <!-- <link rel="stylesheet" href="/assets/css/bootstrap.min.css"> -->
-      
-      <link href="/dist/css/bootstrap.css" rel="stylesheet">
-      <link href="/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-    
-     <link rel="stylesheet" href="/assets/css/custom.css">
-     <link rel="shortcut icon" href"/assets/ico/favicon.png">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href"/assets/ico/favicon.png">
+
+    <title>Students Assignement</title>
+
     <!-- Bootstrap core CSS -->
     <link href="/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap theme -->
@@ -23,10 +23,11 @@
       <script src="../../public/assets/js/html5shiv.js"></script>
       <script src="../../public/assets/js/respond.min.js"></script>
     <![endif]-->
- </head>
+  </head>
+  <br>
+  <br>
 
- <body>
-
+  <body>
 
     <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -47,28 +48,38 @@
       </div>
     </div>
 
- <div class="container">
-         
-
-         <div class="hero-unit">
-         <h1>Syllabest</h1>
-         <p>Cutting edge way to evaluate your werkkkk.</p>
-         </div><!-- .hero-unit -->
-        
- <div class="row">
-            <% @student.each do |student| %>
-         <div class="span-4-custom">
-         <h2><%= student.github_username %></h2>
-         <p><%= student.first_name %> <%= student.last_name %></p>
-         <p><a class="btn" href="/students/<%= student.github_username%>">Assignments &raquo;</a></p>
-         </div><% end %><!-- .span-4-custom -->
-   
-      <br>
-      <br>
- </div><!-- .row -->
- </div><!-- .container -->
+    <div class="container theme-showcase">
+      <div class="page-header">
 
 
-     
- </body>
+        <h1> Evaluate Assignment </h1>
+    
+
+      </div>
+
+<form method="post" role="form" action="/admin/assignments">
+  <div class="form-group">
+		<select class="form-control" style="width: 35%">
+			<% @assignments.each do |assignment| %>
+		  <option> <%= assignment.title %> </option>
+		  <% end %>
+		</select>
+	</div>
+	<div>
+ 	 	<button type="submit" class="btn btn-default success">Test</button>
+	</div>
+</form>
+    </div> <!-- /container -->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/dist/js/bootstrap.min.js"></script>
+    <script src="/assets/dist/js/holder.js"></script>
+  </body>
 </html>
+
+

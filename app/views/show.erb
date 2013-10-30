@@ -8,13 +8,13 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href"/assets/ico/favicon.png">
 
-    <title>Students Assignement</title>
+    <title>Syllabest</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap theme -->
     <link href="/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="/assets/css/custom.css">
     <!-- Custom styles for this template -->
 <!--     <link href="/theme.css" rel="stylesheet"> -->
 
@@ -38,7 +38,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Syllabest</a>
+          <a class="navbar-brand" href="/students">Syllabest</a>
+          <a class="navbar-brand" href="/admin">Admin</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -49,95 +50,102 @@
 
     <div class="container theme-showcase">
       <div class="page-header">
-
-
-        <h1> Assignment </h1>
+        <h1><%= @student.first_name %> <%= @student.last_name %></h1>
+        <!-- <form action="/assignment_submissions/#/" method="POST">
+          <input type="submit" class="btn btn-default test-btn" value="Evaluate"/>
+        </form> -->
         <div class="progress">
-        <div class="progress-bar progress-bar-success" style="width: 35%"><span class="sr-only">35% Complete (success)</span></div>
-        <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
-        <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
+        <div class="progress-bar progress-bar-success" style="width: <%=@pass_percent%>%"></div>
+        <div class="progress-bar progress-bar-warning" style="width: <%=@pending_percent%>%"></div>
+        <div class="progress-bar progress-bar-danger" style="width: <%=@failure_percent%>%"></div>
        <!--  This is where the global progress bar is located. -->
       </div>
       </div>
-      <h2 class="assignment">Assignment #1  <button type="button" class="btn btn-default">Test</button><br></h2>
+      <% @assignment_array.each do |assignment| %>
+      <% if assignment.assignment_submissions.map {|s| s.student_id}.include?(@student.id) %>
+      
+        <form action="/assignment_submissions/<%= AssignmentSubmission.where(:student => @student, :assignment => assignment).first.id %>" method="POST">
+          <input type="submit" class="btn btn-default test-btn" value="Evaluate"/>
+          </form><br>
+          <!-- <button type="button" class="btn btn-default">Evaluate method goes here</button> -->
+      <!-- <button type="button" class="btn btn-default test-btn">Test</button> -->
+      <h2 class="assignment"><%= assignment.title %><br></h2>
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-success">
             <div class="panel-heading">
-              <h3 class="panel-title">Tests Passed</h3>
+              <h3 class="panel-title">Pass</h3>
             </div>
             <div class="panel-body">
-              <table>
-                <tr>
-                  <td>Another thing</td>
-                </tr>
-              </table>
+              <h1><%= AssignmentSubmission.where(:student => @student, :assignment => assignment).first.passes %></h1>
+             
             </div>
           </div>
-  
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+              <h3 class="panel-title">Pending</h3>
             </div>
             <div class="panel-body">
-              Panel content
+              <h1><%= AssignmentSubmission.where(:student => @student, :assignment => assignment).first.pendings %></h1>
             </div>
           </div>
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
           <div class="panel panel-danger">
             <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+              <h3 class="panel-title">Fail</h3>
             </div>
             <div class="panel-body">
-              Panel content
+              <h1><%= AssignmentSubmission.where(:student => @student, :assignment => assignment).first.failures %></h1>
             </div>
           </div>
         </div><!-- /.col-sm-4 -->
       </div>
+      <% else %>
 
-      <h2 class="assignment">Assignment #2:</h2>
+      <!---GREY STUFF -->
+
+      <h2 class="assignment"><%= assignment.title %></h2>
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Tests Passed</h3>
+              <h3 class="panel-title">Pass</h3>
             </div>
             <div class="panel-body">
-              <table>
-                <tr>
-                  <td>Another thing</td>
-                </tr>
-              </table>
+              <h1>0</h1>
             </div>
           </div>
   
-        </div><!-- /.col-sm-4 -->
+        </div>
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+              <h3 class="panel-title">Pending</h3>
             </div>
             <div class="panel-body">
-              Panel content
+              <h1>0</h1>
             </div>
           </div>
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+              <h3 class="panel-title">Fail</h3>
             </div>
             <div class="panel-body">
-              Panel content
+              <h1>0</h1>
             </div>
           </div>
         </div><!-- /.col-sm-4 -->
       </div>
+      <% end %>
+      <% end %>
     </div> <!-- /container -->
-
+    <br>
+    <br>
 
 
     <!-- Bootstrap core JavaScript

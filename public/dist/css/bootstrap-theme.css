@@ -28,6 +28,7 @@
 .btn:active,
 .btn.active {
   background-image: none;
+
 }
 
 .btn-default {
