@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href"/assets/ico/favicon.png">
 
-    <title>Students Assignement</title>
+    <title>Syllabest</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/dist/css/bootstrap.css" rel="stylesheet">
@@ -49,9 +49,7 @@
 
     <div class="container theme-showcase">
       <div class="page-header">
-
-
-        <h1> Assignment </h1>
+        <h1><%= @student.first_name %> <%= @student.last_name %></h1>
         <div class="progress">
         <div class="progress-bar progress-bar-success" style="width: 35%"><span class="sr-only">35% Complete (success)</span></div>
         <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
@@ -59,7 +57,9 @@
        <!--  This is where the global progress bar is located. -->
       </div>
       </div>
-      <h2 class="assignment">Assignment #1  <button type="button" class="btn btn-default">Test</button><br></h2>
+      <% @assignment_array.each do |assignment| %>
+      <% if assignment.assignment_submissions.map {|s| s.student_id}.include?(@student.id) %>
+      <h2 class="assignment"><%= assignment.title %><button type="button" class="btn btn-default">Test</button><br></h2>
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-success">
@@ -74,7 +74,6 @@
               </table>
             </div>
           </div>
-  
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
           <div class="panel panel-warning">
@@ -97,8 +96,11 @@
           </div>
         </div><!-- /.col-sm-4 -->
       </div>
+      <% else %>
 
-      <h2 class="assignment">Assignment #2:</h2>
+      <!---GREY STUFF -->
+
+      <h2 class="assignment"><%= assignment.title %><button type="button" class="btn btn-default">Test</button></h2>
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-default">
@@ -114,7 +116,7 @@
             </div>
           </div>
   
-        </div><!-- /.col-sm-4 -->
+        </div>
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -136,8 +138,11 @@
           </div>
         </div><!-- /.col-sm-4 -->
       </div>
+      <% end %>
+      <% end %>
     </div> <!-- /container -->
-
+    <br>
+    <br>
 
 
     <!-- Bootstrap core JavaScript
