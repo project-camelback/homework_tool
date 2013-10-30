@@ -37,6 +37,12 @@ class StudentController < ApplicationController
       erb :show
   end
 
+  post '/assignment_submissions/:id' do
+    assignment_submission = AssignmentSubmission[params[:id]]
+    assignment_submission.evaluate
+    redirect "/students/#{assignment_submission.student.github_username}"
+  end
+
   post '/students' do
     @student = Student.create(params)
     redirect "/students/#{@student.id}"

@@ -59,7 +59,11 @@
       </div>
       <% @assignment_array.each do |assignment| %>
       <% if assignment.assignment_submissions.map {|s| s.student_id}.include?(@student.id) %>
-      <h2 class="assignment"><%= assignment.title %><button type="button" class="btn btn-default">Evaluate method goes here</button><br></h2>
+      <h2 class="assignment"><%= assignment.title %>
+        <form action="/assignment_submissions/<%= AssignmentSubmission.where(:student => @student, :assignment => assignment).first.id %>" method="POST">
+          <input type="submit" value="Test"/>
+          </form><br></h2>
+          <!-- <button type="button" class="btn btn-default">Evaluate method goes here</button> -->
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-success">
@@ -97,7 +101,7 @@
 
       <!---GREY STUFF -->
 
-      <h2 class="assignment"><%= assignment.title %><button type="button" class="btn btn-default">Test</button></h2>
+      <h2 class="assignment"><%= assignment.title %><!-- <button type="button" class="btn btn-default">Test</button> --></h2>
       <div class="row">
         <div class="col-sm-4">
           <div class="panel panel-default">
