@@ -1,6 +1,6 @@
 task :default => [:cli]
 
-task :cli do #=> [:"db:reload"] do
+task :cli => [:"db:reload"] do
   require_relative 'config/environment'
   HomeworkToolCLI.new.run
 end

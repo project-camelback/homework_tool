@@ -36,28 +36,36 @@ class RSpecChecker
   end
 
   def execute_rspec
-    config = RSpec.configuration
-    json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.output)
-    reporter =  RSpec::Core::Reporter.new(json_formatter)
-    config.instance_variable_set(:@reporter, reporter)
-    FileUtils.cd("tmp/#{self.user_name}")
-    if File.exist?("Gemfile")
-      puts "#{self.user_name}: before bundle install"
-      system('bundle install > /dev/null')
-      puts "#{self.user_name}: after bundle install"
-    end
-    puts "#{self.user_name}: before running RSpec"
-    begin
-      RSpec::Core::Runner.run(["./"])
-      puts "#{self.user_name}: after running RSpec"
-      @rspec_output = json_formatter.output_hash
-    rescue Exception => e
-      self.failure_condition = true
-      @failure_hash = { :failure_descriptions => "Unable to run RSpec: #{e.message}" }
-      puts "#{self.user_name}: RSpec failed."
-    ensure
-      FileUtils.cd("../..")
-      remove_user_directory
+    Bundler.with_clean_env do
+      config = RSpec.configuration
+      json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.output)
+      reporter =  RSpec::Core::Reporter.new(json_formatter)
+      config.instance_variable_set(:@reporter, reporter)
+      FileUtils.cd("tmp/#{self.user_name}")
+      if File.exist?("Gemfile")
+        puts "#{self.user_name}: before bundle install"
+        # Bundler.with_clean_env do
+          system('bundle install #> /dev/null')
+        # end
+        puts "#{self.user_name}: after bundle install"
+      end
+      puts "#{self.user_name}: before running RSpec"
+      begin
+      
+          # system('bundle install #> /dev/null')
+          # sleep 5
+          RSpec::Core::Runner.run(["./"])
+        
+        puts "#{self.user_name}: after running RSpec"
+        @rspec_output = json_formatter.output_hash
+      rescue Exception => e
+        self.failure_condition = true
+        @failure_hash = { :failure_descriptions => "Unable to run RSpec: #{e.message}" }
+        puts "#{self.user_name}: RSpec failed."
+      ensure
+        FileUtils.cd("../..")
+        remove_user_directory
+      end
     end
   end
   

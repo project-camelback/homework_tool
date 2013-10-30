@@ -10,7 +10,7 @@ class AssignmentSubmission < Sequel::Model
 
   def self.evaluate_all(assignment)
     assignment.assignment_submissions.each do |sub|
-      system("ruby bin/evaluate.rb #{sub.id} &> /dev/null &")
+      system("ruby bin/evaluate.rb #{sub.id} &#&> /dev/null &")
     end
   end
 
