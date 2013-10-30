@@ -37,6 +37,12 @@ class StudentController < ApplicationController
     erb :show
   end
 
+  post '/assignment_submissions/' do
+    Assignment.all.each { |assignment| assignment.pull_submissions}
+    redirect "/students/#{params[:github_username]}"
+
+  end
+
   post '/assignment_submissions/:id' do
     assignment_submission = AssignmentSubmission[params[:id]]
     assignment_submission.evaluate
