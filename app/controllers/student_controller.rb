@@ -32,6 +32,22 @@ class StudentController < ApplicationController
   #   end
   # end
 
+	get '/admin/new' do
+  	erb :new
+  end
+
+  get '/admin' do
+  	erb :admin
+  end
+
+ 	get '/admin/eval' do
+  	erb :eval
+  end
+
+ 	get '/admin/submissions' do
+  	erb :submissions
+  end
+
   post '/students/:id/destroy' do
     if @student = Student[params[:id].to_i]
       @student.destroy
