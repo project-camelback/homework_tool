@@ -23,7 +23,7 @@ class StudentController < ApplicationController
 
   get '/students/:github_username' do
       @student = Student.find(:github_username => params[:github_username])
-      @assignment_array = Assignment.all
+      @assignment_array = Assignment.order(:due_date)
       binding.pry
       #SELECT * FROM assignment_submissions 
       #WHERE student_id = #{actualstudentid} AND assignment_id == 5
