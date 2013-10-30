@@ -55,7 +55,7 @@ class RSpecChecker
           # system('bundle install #> /dev/null')
           # sleep 5
           RSpec::Core::Runner.run(["./"])
-        end
+
         puts "#{self.user_name}: after running RSpec"
         @rspec_output = json_formatter.output_hash
       rescue Exception => e
