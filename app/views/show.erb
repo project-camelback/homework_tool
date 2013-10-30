@@ -51,21 +51,24 @@
     <div class="container theme-showcase">
       <div class="page-header">
         <h1><%= @student.first_name %> <%= @student.last_name %></h1>
+        <!-- <form action="/assignment_submissions/#/" method="POST">
+          <input type="submit" class="btn btn-default test-btn" value="Evaluate"/>
+        </form> -->
         <div class="progress">
-        <div class="progress-bar progress-bar-success" style="width: <%=@pass_percent%>%"><span class="sr-only">35% Complete (success)</span></div>
-        <div class="progress-bar progress-bar-warning" style="width: <%=@pending_percent%>%"><span class="sr-only">20% Complete (warning)</span></div>
-        <div class="progress-bar progress-bar-danger" style="width: <%=@failure_percent%>%"><span class='sr-only'>10% Complete (danger)</span></div>
+        <div class="progress-bar progress-bar-success" style="width: <%=@pass_percent%>%"></div>
+        <div class="progress-bar progress-bar-warning" style="width: <%=@pending_percent%>%"></div>
+        <div class="progress-bar progress-bar-danger" style="width: <%=@failure_percent%>%"></div>
        <!--  This is where the global progress bar is located. -->
       </div>
       </div>
       <% @assignment_array.each do |assignment| %>
       <% if assignment.assignment_submissions.map {|s| s.student_id}.include?(@student.id) %>
-      <h2 class="assignment"><%= assignment.title %>
+      
         <form action="/assignment_submissions/<%= AssignmentSubmission.where(:student => @student, :assignment => assignment).first.id %>" method="POST">
-          <input type="submit" value="Test"/>
-          </form><br></h2>
+          <input type="submit" class="btn btn-default test-btn" value="Evaluate"/>
+          </form><br>
           <!-- <button type="button" class="btn btn-default">Evaluate method goes here</button> -->
-      <button type="button" class="btn btn-default test-btn">Test</button>
+      <!-- <button type="button" class="btn btn-default test-btn">Test</button> -->
       <h2 class="assignment"><%= assignment.title %><br></h2>
       <div class="row">
         <div class="col-sm-4">
@@ -104,8 +107,6 @@
 
       <!---GREY STUFF -->
 
-      <h2 class="assignment"><%= assignment.title %><!-- <button type="button" class="btn btn-default">Test</button> --></h2>
-      <button type="button" class="btn btn-default test-btn">Test</button>
       <h2 class="assignment"><%= assignment.title %></h2>
       <div class="row">
         <div class="col-sm-4">
