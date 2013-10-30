@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+         <meta charset="utf-8">
+         <title>Getting started with Bootstrap</title>
+          <link href="/dist/css/bootstrap.css" rel="stylesheet">
+          <link href="/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+         <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+         <link rel="stylesheet" href="/assets/css/custom.css">
+ </head>
+ <body>
+
+
+  <!--   Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Syllabest</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+ <div class="container">
+         
+         <div class="hero-unit">
+         <h1>Syllabest</h1>
+         <p>Cutting edge way to evaluate your werkkkk.</p>
+         </div><!-- .hero-unit -->
+        
+ <div class="row">
+            <% @student.each do |student| %>
+         <div class="span-4-custom">
+         <h2><%= student.github_username %></h2>
+         <p>Infomation here</p>
+         <p><a class="btn" href="/students/<%= student.github_username%>">Assignments &raquo;</a></p>
+         </div><% end %><!-- .span-4-custom -->
+   
+      <br>
+      <br>
+ </div><!-- .row -->
+ </div><!-- .container -->
+     
+ </body>
+</html>
