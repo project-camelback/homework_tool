@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # grader.sh <$1 github_username> <$2 github_repository> <$3 branch>
+unset BUNDLE_GEMFILE
 
 mkdir -p tmp
 cd tmp
@@ -10,10 +11,12 @@ cd $1
 git checkout $3
 
 # Comment out 'binding.pry' in all ruby files
-find ./ -name \*.rb -exec sed -i "s/binding.pry/#binding.pry/g" {} \;
+# find ./ -name \*.rb -exec sed -i "s/binding.pry/#binding.pry/g" {} \;
 
 if [ -a Gemfile ] ; then
-  bundle install
+  bundle install --verbose
 fi
+pwd
+# future use: 
 
-rspec --require ../../rspec_setup.rb --format json --output .rspec-results.json
+bundle exec rspec --format json --out .rspec-results.json --require ../../rspec_setup.rb
