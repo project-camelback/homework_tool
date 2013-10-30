@@ -34,16 +34,8 @@ class StudentController < ApplicationController
       @pass_percent = @total_passes.to_f/@total * 100
       @pending_percent = @total_pendings.to_f/@total * 100
       @failure_percent = @total_failures.to_f/@total * 100
-      binding.pry
-      #SELECT * FROM assignment_submissions 
-      #WHERE student_id = #{actualstudentid} AND assignment_id == 5
       erb :show
   end
-
-#we have a studet, and we want to get all of their passes across all assignments
-#and for pending, and failures
-#then we want to divide by total for each group
-#then we put that into the appropriate parts
 
   post '/students' do
     @student = Student.create(params)
