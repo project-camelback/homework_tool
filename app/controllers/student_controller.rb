@@ -22,19 +22,19 @@ class StudentController < ApplicationController
   end
 
   get '/students/:github_username' do
-      @student = Student.find(:github_username => params[:github_username])
-      @assignment_array = Assignment.order(:due_date)
-      @total_passes = 0
-      @student.assignment_submissions.each {|s| @total_passes += s.passes}
-      @total_pendings = 0
-      @student.assignment_submissions.each {|s| @total_pendings += s.pendings}
-      @total_failures = 0
-      @student.assignment_submissions.each {|s| @total_failures += s.failures}
-      @total = @total_passes + @total_pendings + @total_failures
-      @pass_percent = @total_passes.to_f/@total * 100
-      @pending_percent = @total_pendings.to_f/@total * 100
-      @failure_percent = @total_failures.to_f/@total * 100
-      erb :show
+    @student = Student.find(:github_username => params[:github_username])
+    @assignment_array = Assignment.order(:due_date)
+    @total_passes = 0
+    @student.assignment_submissions.each {|s| @total_passes += s.passes}
+    @total_pendings = 0
+    @student.assignment_submissions.each {|s| @total_pendings += s.pendings}
+    @total_failures = 0
+    @student.assignment_submissions.each {|s| @total_failures += s.failures}
+    @total = @total_passes + @total_pendings + @total_failures
+    @pass_percent = @total_passes.to_f/@total * 100
+    @pending_percent = @total_pendings.to_f/@total * 100
+    @failure_percent = @total_failures.to_f/@total * 100
+    erb :show
   end
 
   post '/assignment_submissions/:id' do
