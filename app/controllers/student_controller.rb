@@ -53,10 +53,18 @@ class StudentController < ApplicationController
   end
 
  	get '/admin/eval' do
+ 		@assignments = Assignment.all
   	erb :eval
   end
 
- 	get '/admin/submissions' do
+  post '/admin/assignments' do
+  	@assignment = Assignment.create(params)
+  	redirect "/admin/eval"
+  end
+
+ 	get '/admin/assignments/:id/submissions' do
+ 		@assignment = Assignment[params[:id].to_i]
+ 		binding.pry
   	erb :submissions
   end
 

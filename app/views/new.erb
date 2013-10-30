@@ -38,7 +38,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Syllabest</a>
+          <a class="navbar-brand" href="/students">Syllabest</a>
+          <a class="navbar-brand" href="/admin">Admin</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -55,7 +56,7 @@
         
    
       </div>
-      <form role="form">
+      <form method="post" role="form" action="/admin/assignments">
   <div class="form-group">
     <label for="title">Assignment Name</label>
     <input type="text" id="title" name="assignment[title]" class="form-control" style="width: 50%">
