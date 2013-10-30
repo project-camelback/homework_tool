@@ -7,6 +7,7 @@ Sequel.migration do
       String   :email
       String   :password_hash
       String   :github_username
+      String   :avatar_url
       String   :semester
     end
   end
