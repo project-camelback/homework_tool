@@ -43,6 +43,7 @@ INSERT INTO students (first_name, last_name, github_username) VALUES ('Edina', '
 UPDATE students SET semester='ruby-003';
 
 INSERT INTO assignments (title, post_date, due_date, url, branch) VALUES
+ ("Unit 2 Quiz", "2013-10-29", "2013-12-13 12:00", "git@github.com:flatiron-school/ruby-003-unit-2.git", "master"),
  ("Day 24: Sinatra and ORM Spooky Lab", "2013-10-25", "2013-12-13 12:00", "git@github.com:flatiron-school/sinatra-orm-halloween-ruby-003.git", "master"),
  ("Day 23: HW - Rock, Paper, Scissors part 2", "2013-10-25", "2013-12-13 12:00", "git@github.com:flatiron-school/rps-game-app.git", "part-2-solution"),
  ("Day 21: TODO - Sinatra/Rspec/Rack::Test", "2013-10-24", "2013-12-13 12:00", "git@github.com:flatiron-school/sinatra-rspec-intro-ruby-003.git", "master"),
