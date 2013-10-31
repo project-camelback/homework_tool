@@ -25,3 +25,7 @@ body {
 .row {
 	vertical-align: top;
 }
+
+.btn-center {
+	float: center;
+}

@@ -72,7 +72,7 @@ class StudentController < ApplicationController
   end
 
  	get '/admin/eval' do
- 		@assignments = Assignment.all.reverse
+ 		@assignments = Assignment.all
   	erb :eval
   end
 
