@@ -83,6 +83,8 @@ class StudentController < ApplicationController
   	redirect "/admin/eval"
   end
 
+# evaluate button works but have error: 
+# No such file or directory - tmp/kyleshike/.rspec-results.json 
   post '/admin/assignments/evaluate' do
     assignment = Assignment[params[:id]]
     AssignmentSubmission.evaluate_all(assignment)

@@ -2,14 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href"/assets/ico/favicon.png">
-
-    <title>Students Assignement</title>
-
+     <meta charset="utf-8">
+     <title>Getting started with Bootstrap</title>
+      <!-- <link rel="stylesheet" href="/assets/css/bootstrap.min.css"> -->
+      
+      <link href="/dist/css/bootstrap.css" rel="stylesheet">
+      <link href="/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    
+     <link rel="stylesheet" href="/assets/css/custom.css">
+     <link rel="shortcut icon" href"/assets/ico/favicon.png">
     <!-- Bootstrap core CSS -->
     <link href="/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Bootstrap theme -->
@@ -57,18 +58,27 @@
 
       </div>
 
-<form method="post" role="form" action="/admin/assignments/evaluate">
-  <div class="form-group">
-		<select class="form-control" style="width: 35%" name="id">
-			<% @assignments.each do |assignment| %>
-		  <option value="<%= assignment.id %>"> <%= assignment.title %> </option>
-		  <% end %>
-		</select>
-	</div>
-	<div>
- 	 	<button type="submit" class="btn btn-default success">Evaluate</button>
-	</div>
-</form>
+
+<div>
+  <table class="table table-hover">
+
+	<% @assignments.each do |assignment| %>
+	<tr>
+  	<td width="5%"><h3><%= assignment.id %></h3></td>
+  	<td width="50%"><h3><%= assignment.title %></h3></td>
+  	<td width="15%">
+  		<form method="post" action="/admin/assignments/evaluate"><input type="hidden" name="id" value="<%=assignment.id %>"><input type="submit" value="Evaluate" class="btn btn-success submit-btn"></form></td>
+  	<td width="15%">
+  		<form method="post" action="/admin/assignments/<%= assignment.id %>/submissions"><input type="hidden" name="id" value="<%=assignment.id %>"><input type="submit" value="Submissions" class="btn btn-info submit-btn"></form></td>
+  	<td width="15%">
+  		<form method="post" action="/admin/assignments/<%= assignment.id %>/pullforks"><input type="hidden" name="id" value="<%=assignment.id %>"><input type="submit" value="Pull Forks" class="btn btn-warning submit-btn"></form>
+  	</td>
+  </tr>
+  <% end %>
+  </table>
+</div>
+
+
     </div> <!-- /container -->
 
 
