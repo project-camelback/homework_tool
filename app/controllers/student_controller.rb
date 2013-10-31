@@ -71,9 +71,9 @@ class StudentController < ApplicationController
   	erb :admin
   end
 
- 	get '/admin/eval' do
- 		@assignments = Assignment.all.reverse
-  	erb :eval
+ 	get '/admin/assignments' do
+ 		@assignments = Assignment.all
+  	erb :assignments
   end
 
   post '/admin/assignments' do
@@ -85,14 +85,23 @@ class StudentController < ApplicationController
 
   post '/admin/assignments/evaluate' do
     assignment = Assignment[params[:id]]
-    assignment.pull_submissions
     AssignmentSubmission.evaluate_all(assignment)
+    redirect "/admin/assignments/#{params[:id]}/submissions"
+  end
+
+   post '/admin/assignments/:id/pullforks' do
+    assignment = Assignment[params[:id]]
+    assignment.pull_submissions
     redirect "/admin/assignments/#{params[:id]}/submissions"
   end
 
  	get '/admin/assignments/:id/submissions' do
  		@assignment = Assignment[params[:id].to_i]
   	erb :submissions
+  end
+
+  post '/admin/assignments/:id/submissions' do
+  	redirect "/admin/assignments/#{params[:id]}/submissions"
   end
 
   post '/students/:id/destroy' do
