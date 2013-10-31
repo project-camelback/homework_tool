@@ -22,6 +22,15 @@ body {
 	margin-top: 40px;
 }
 
+.submit-btn {
+	float: center;
+	margin-top: 12px;
+}
+
 .row {
 	vertical-align: top;
+}
+
+.btn-center {
+	float: center;
 }
