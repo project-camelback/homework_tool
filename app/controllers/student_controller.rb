@@ -80,7 +80,7 @@ class StudentController < ApplicationController
     params[:assignment][:post_date] = Chronic.parse(params[:assignment][:post_date])
     params[:assignment][:due_date] = Chronic.parse(params[:assignment][:due_date])
   	@assignment = Assignment.create(params[:assignment])
-  	redirect "/admin/eval"
+  	redirect "/admin/assignments"
   end
 
 # evaluate button works but have error: 
