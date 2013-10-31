@@ -1,6 +1,6 @@
 class HomeworkToolCLI
 
-  COMMANDS =[:help, :exit, :assignments, :new, :evaluate, :submissions, :p]
+  COMMANDS =[:help, :exit, :assignments, :new, :evaluate, :submissions, :p, :s, :e, :a]
 
   def initialize
     @banner_message = "Welcome to HomeworkTool d(-_-)b"
@@ -80,14 +80,18 @@ class HomeworkToolCLI
     print prompt 
     gets.chomp.strip
   end
-
+  def a
+    assignments
+  end
   def assignments
     Assignment.all.each do |assignment|
       puts "#{assignment.id}. #{assignment.title}"
     end
     puts ""
   end
-
+  def s
+    submissions
+  end
   def submissions
     assignments
     print "Enter assignment ID: " 
@@ -101,7 +105,9 @@ class HomeworkToolCLI
       puts "Assignment ID not found!"
     end
   end
-
+  def e
+    evaluate
+  end
   def evaluate
     assignments
     print "Enter assignment ID: " 

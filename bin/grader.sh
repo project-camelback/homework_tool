@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# grader.sh <$1 github_username> <$2 github_repository> <$3 branch>
+# grader.sh <$1 github_username> <$2 github_repository> <$3 branch> <$4 submission id>
+
 unset BUNDLE_GEMFILE
 
 mkdir -p tmp
@@ -14,7 +15,12 @@ git checkout $3
 # find ./ -name \*.rb -exec sed -i "s/binding.pry/#binding.pry/g" {} \;
 
 if [ -a Gemfile ] ; then
+  bundle config gemfile ./Gemfile
   bundle install --verbose
 fi
 
 bundle exec rspec --format json --out .rspec-results.json --require ../../rspec_setup.rb &> .rspec-results.errors
+
+cd ../..
+unset BUNDLE_GEMFILE
+ruby bin/process_evaluation.rb $4 &

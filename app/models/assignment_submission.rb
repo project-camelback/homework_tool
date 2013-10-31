@@ -10,7 +10,7 @@ class AssignmentSubmission < Sequel::Model
   end
 
   def grader_command
-    "bash bin/grader.sh %s %s %s &> /dev/null" % [github_username, self.url, self.assignment.branch]
+    "bash bin/grader.sh %s %s %s %s &#> /dev/null &" % [github_username, self.url, self.assignment.branch, self.id]
   end
 
   def results_file
@@ -21,18 +21,11 @@ class AssignmentSubmission < Sequel::Model
     "tmp/#{self.github_username}/.rspec-results.errors"
   end
 
-  def evaluate
-    system(grader_command)
-    results = File.read(results_file)
-    assignment_submissions_hash = if results.empty?
-      {:failure_descriptions => File.read(errors_file),
-       :evaluated => true, :evaluation_date => Time.now
-      }
-    else
+  def process_evaluation
+    assignment_submissions_hash = if File.exists?(results_file)
+      results = File.read(results_file)
       results_json = Oj.load(results, symbol_keys: true)
-
       {
-        :evaluated => true, :evaluation_date => Time.now,
         :examples => results_json[:summary][:example_count],
         :passes => results_json[:summary][:example_count] - results_json[:summary][:failure_count] - results_json[:summary][:pending_count],
         :pendings => results_json[:summary][:pending_count],
@@ -41,9 +34,21 @@ class AssignmentSubmission < Sequel::Model
           example[:status] == 'failed'
         end.map {|ex| ex[:full_description]}.join(";")
       }
+    elsif File.exists?(errors_file)
+      {:failure_descriptions => File.read(errors_file)}
+    else
+      {:failure_descriptions => "Unknown fatal error."}
     end
+
+    assignment_submissions_hash.merge!({ :evaluated => true, :evaluation_date => Time.now })
+    
     self.update(assignment_submissions_hash)
+    
     FileUtils.rm_r("tmp/#{github_username}")
+  end
+
+  def evaluate
+    system(grader_command)
   end
 
   def self.evaluate_all(assignment)
