@@ -71,9 +71,9 @@ class StudentController < ApplicationController
   	erb :admin
   end
 
- 	get '/admin/eval' do
+ 	get '/admin/assignments' do
  		@assignments = Assignment.all
-  	erb :eval
+  	erb :assignments
   end
 
   post '/admin/assignments' do
@@ -83,7 +83,16 @@ class StudentController < ApplicationController
   	redirect "/admin/eval"
   end
 
+# evaluate button works but have error: 
+# No such file or directory - tmp/kyleshike/.rspec-results.json 
   post '/admin/assignments/evaluate' do
+    assignment = Assignment[params[:id]]
+    assignment.pull_submissions
+    AssignmentSubmission.evaluate_all(assignment)
+    redirect "/admin/assignments/#{params[:id]}/submissions"
+  end
+
+   post '/admin/assignments/:id/pullforks' do
     assignment = Assignment[params[:id]]
     assignment.pull_submissions
     AssignmentSubmission.evaluate_all(assignment)
@@ -93,6 +102,10 @@ class StudentController < ApplicationController
  	get '/admin/assignments/:id/submissions' do
  		@assignment = Assignment[params[:id].to_i]
   	erb :submissions
+  end
+
+  post '/admin/assignments/:id/submissions' do
+  	redirect "/admin/assignments/#{params[:id]}/submissions"
   end
 
   post '/students/:id/destroy' do

@@ -66,9 +66,13 @@
 	<tr>
   	<td width="5%"><h3><%= assignment.id %></h3></td>
   	<td width="50%"><h3><%= assignment.title %></h3></td>
-  	<td width="15%"><button type="submit" class="btn btn-warning btn-center">Evaluate</button></td>
-  	<td width="15%"><button type="submit" class="btn btn-info btn-center">Submissions</button></td>
-  	<td width="15%"><button type="submit" class="btn btn-success btn-center">Pull Forks</button></td>
+  	<td width="15%">
+  		<form method="post" action="/admin/assignments/evaluate"><input type="hidden" name="id" value="<%=assignment.id %>"><input type="submit" value="Evaluate" class="btn btn-success submit-btn"></form></td>
+  	<td width="15%">
+  		<form method="post" action="/admin/assignments/<%= assignment.id %>/submissions"><input type="hidden" name="id" value="<%=assignment.id %>"><input type="submit" value="Submissions" class="btn btn-info submit-btn"></form></td>
+  	<td width="15%">
+  		<form method="post" action="/admin/assignments/<%= assignment.id %>/pullforks"><input type="hidden" name="id" value="<%=assignment.id %>"><input type="submit" value="Pull Forks" class="btn btn-warning submit-btn"></form>
+  	</td>
   </tr>
   <% end %>
   </table>
