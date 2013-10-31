@@ -10,7 +10,7 @@ class AssignmentSubmission < Sequel::Model
   end
 
   def grader_command
-    "bash bin/grader.sh %s %s %s %s &#> /dev/null &" % [github_username, self.url, self.assignment.branch, self.id]
+    "bash bin/grader.sh %s %s %s %s &> /dev/null &" % [github_username, self.url, self.assignment.branch, self.id]
   end
 
   def results_file
@@ -22,8 +22,7 @@ class AssignmentSubmission < Sequel::Model
   end
 
   def process_evaluation
-    assignment_submissions_hash = if File.exists?(results_file)
-      results = File.read(results_file)
+    assignment_submissions_hash = if File.exists?(results_file) && !(results = File.read(results_file)).empty?
       results_json = Oj.load(results, symbol_keys: true)
       {
         :examples => results_json[:summary][:example_count],
@@ -48,6 +47,7 @@ class AssignmentSubmission < Sequel::Model
   end
 
   def evaluate
+    self.update(:evaluated => false)
     system(grader_command)
   end
 

@@ -75,7 +75,7 @@
           <!-- <button type="button" class="btn btn-default">Evaluate method goes here</button> -->
       <!-- <button type="button" class="btn btn-default test-btn">Test</button> -->
       <h2 class="assignment"><%= assignment.title %><br></h2>
-      <div class="row">
+      <div class="row text-center">
         <div class="col-sm-4">
           <div class="panel panel-success">
             <div class="panel-heading">
@@ -108,13 +108,9 @@
           </div>
         </div><!-- /.col-sm-4 -->
       </div>
-        <% if assignment_submission.failure_descriptions %>
+        <% unless assignment_submission.failure_descriptions.empty? %>
           <div class="row"><div class="col-sm-12">
-            <div class="well well-sm">
-              <code>
-              <%= assignment_submission.failure_descriptions.strip.split(';').map{|f| "- " + f.strip}.join('<br/>') %>
-              </code>
-            </div>
+                <pre><%= assignment_submission.failure_descriptions.strip.split(';').map{|f| "• #{f.strip}" }.join("\n") %></pre>
           </div>
       </div>
         <% end %>
@@ -123,7 +119,7 @@
       <!---GREY STUFF -->
 
       <h2 class="assignment"><%= assignment.title %></h2>
-      <div class="row">
+      <div class="row text-center">
         <div class="col-sm-4">
           <div class="panel panel-default">
             <div class="panel-heading">

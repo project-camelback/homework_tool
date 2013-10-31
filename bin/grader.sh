@@ -19,7 +19,8 @@ if [ -a Gemfile ] ; then
   bundle install --verbose
 fi
 
-bundle exec rspec --format json --out .rspec-results.json --require ../../rspec_setup.rb &> .rspec-results.errors
+# --require ../../rspec_setup.rb 
+bundle exec rspec --format json --out .rspec-results.json &> .rspec-results.errors
 
 cd ../..
 unset BUNDLE_GEMFILE
