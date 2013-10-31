@@ -3,30 +3,32 @@ class HomeworkToolCLI
   COMMANDS =[:help, :exit, :assignments, :new, :evaluate, :submissions, :p, :s, :e, :a]
 
   def initialize
-    @banner_message = "Welcome to HomeworkTool d(-_-)b"
+    @banner_message = " "*8 + "*****".red + "  Welcome to HomeworkTool d(-_-)b  ".green + "*****".red
     @prompt         = "#> "   
     @percentage     = 100
   end
 
   def new
-    puts "Create New Assignment"
+    puts ""
+    puts "Create New Assignment".yellow
     puts "====================="
     puts ""
 
     new_assignment = {
-      title: input("Title: "),
-      description: input("Description: "),
-      post_date: Chronic.parse(input("Post Date: ")),
-      due_date: Chronic.parse(input("Due Date: ")),
-      url: input("Github URL: "),
-      branch: input("Branch: ")
+      title: input("Title: ".green),
+      description: input("Description: ".green),
+      post_date: Chronic.parse(input("Post Date: ".green)),
+      due_date: Chronic.parse(input("Due Date: ".green)),
+      url: input("Github URL: ".green),
+      branch: input("Branch: ".green)
     }
 
     puts ""
 
-    if ["","y"].include?(input("Save assignment? [Y/n] ").downcase)
+    if ["","y"].include?(input("Save assignment? [#{'Y'.green}/#{'n'.red}] ").downcase)
       Assignment.create(new_assignment)
     end
+    puts ""
   end
 
   def p
@@ -68,8 +70,11 @@ class HomeworkToolCLI
   end
 
   def run
+    system "clear"
     @on=true
+    puts ""
     puts @banner_message
+    puts ""
     help
       while @on
         process(input)
@@ -84,6 +89,10 @@ class HomeworkToolCLI
     assignments
   end
   def assignments
+    puts ""
+    puts "Assignments".yellow
+    puts "==========="
+    puts ""
     Assignment.all.each do |assignment|
       puts "#{assignment.id}. #{assignment.title}"
     end
@@ -94,15 +103,19 @@ class HomeworkToolCLI
   end
   def submissions
     assignments
-    print "Enter assignment ID: " 
-    assignment_id = input("").strip
+    assignment_id = input("Enter assignment ID: ".green).strip
     if assignment = Assignment[assignment_id]
+      puts ""
+      puts assignment.title.yellow
+      puts "="*(assignment.title.length)
+      puts ""
+
       assignment.assignment_submissions.each do |sub|
         puts "#{sub.student.first_name} #{sub.student.last_name}:"
         puts " └──> Passes: %s  Failures: %s  Pending: %s" % [sub.passes.to_s.green, sub.failures.to_s.red, sub.pendings.to_s.yellow]
       end
     else
-      puts "Assignment ID not found!"
+      puts "Assignment ID not found!".red
     end
   end
   def e
@@ -110,8 +123,7 @@ class HomeworkToolCLI
   end
   def evaluate
     assignments
-    print "Enter assignment ID: " 
-    assignment_id = input("").strip
+    assignment_id = input("Enter assignment ID: ".green).strip
     if assignment = Assignment[assignment_id]
       assignment.pull_submissions
       AssignmentSubmission.evaluate_all(assignment)
@@ -126,7 +138,7 @@ class HomeworkToolCLI
       puts ""
       puts "#{assignment.assignment_submissions.count} assignments evaluated."
     else
-      puts "Assignment ID not found!"
+      puts "Assignment ID not found!".red
     end
   end
 
@@ -138,18 +150,20 @@ class HomeworkToolCLI
     elsif COMMANDS.include?(command)
       self.send(command) 
     else
-      puts "Invalid input. Please try again."
+      puts "Invalid input. Please try again.".red
     end
   end
 
   def help
-    puts (["The most commonly used homework tool commands are:",
-           "  new            Create a new assignment",
-           "  assignments    List all assignments",
-           "  submissions    List all submissions",
-           "  evaluate       Evaluate all submissions for an assignment",
-           "  help           Display the list of accepted commands",
-           "  exit           Exit the application"]).join("\n")
+    puts ""
+    puts (["  The most commonly used homework tool commands are:", "",
+           "      new            Create a new assignment",
+           "      assignments    List all assignments",
+           "      submissions    List all submissions",
+           "      evaluate       Evaluate all submissions for an assignment",
+           "      help           Display the list of accepted commands",
+           "      exit           Exit the application", "", ""]).join("\n")
+    puts ""
   end
 
 
