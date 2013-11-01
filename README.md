@@ -9,37 +9,6 @@ json_stuff = json.parse(github)
 json_stuff[:clone_url]
 json_stuff[:owner][:login]
 
-url": "https://github.com/andersr/rps-game-app.git",
-    "clone_url": "https://github.com/sarony/rps-game-app.git",
-    "clone_url": "https://github.com/mecampbellsoup/rps-game-app.git",
-    "clone_url": "https://github.com/margaretleedees2/rps-game-app.git",
-    "clone_url": "https://github.com/polycarpou/rps-game-app.git",
-    "clone_url": "https://github.com/kyleshike/rps-game-app.git",
-    "clone_url": "https://github.com/EdinaVath/rps-game-app.git",
-    "clone_url": "https://github.com/stephaniehoh/rps-game-app.git",
-    "clone_url": "https://github.com/manu3569/rps-game-app.git",
-    "clone_url": "https://github.com/davidbella/rps-game-app.git",
-    "clone_url": "https://github.com/richardsonjm/rps-game-app.git",
-    "clone_url": "https://github.com/glamouracademy/rps-game-app.git",
-    "clone_url": "https://github.com/ahimmelstoss/rps-game-app.git",
-    "clone_url": "https://github.com/loganhasson/rps-game-app.git",
-    "clone_url": "https://github.com/manleyhimself/rps-game-app.git",
-    "clone_url": "https://github.com/Clee681/rps-game-app.git",
-    "clone_url": "https://github.com/scottluptowski/rps-game-app.git",
-    "clone_url": "https://github.com/PHJ45/rps-game-app.git",
-    "clone_url": "https://github.com/theevo/rps-game-app.git",
-    "clone_url": "https://github.com/mikespangler/rps-game-app.git",
-    "clone_url": "https://github.com/sonejah21/rps-game-app.git",
-    "clone_url": "https://github.com/rosiehoyem/rps-game-app.git",
-    "clone_url": "https://github.com/AYC726/rps-game-app.git",
-    "clone_url": "https://github.com/irmiller22/rps-game-app.git",
-    "clone_url": "https://github.com/jamesjtong/rps-game-app.git",
-    "clone_url": "https://github.com/ivanbrennan/rps-game-app.git",
-100  159k  100  159k       "clone_url": "https://github.com/vcavallo/rps-game-app.git",
- 0     0   124k      0  0:00:01  0:00:01 --:--:--  134k
-    "clone_url": "https://github.com/jnoconor/rps-game-app.git",
-    "clone_url": "https://github.com/emilyxxie/rps-game-app.git",
-    "clone_url": "https://github.com/J-Scag/rps-game-app.git",
 
 ## Models
 
@@ -56,3 +25,16 @@ RSpecChecker
 * self.run
 
 
+TODO
+* Load new assignments automatically via ".assignment" file in root of repo
+* Configure version of ruby to be used for testing (rvm)
+* contineous integrations - let GitHub notify us about assignment or student repo changes
+* SimpleCov integration
+* TravisCI like badge for student repro
+* Commonly failed tests
+* Replace grader.sh with pure ruby code
+* Build and use VirtualBox image for grading
+* Create HTTP API
+
+https://github.com/rails/rails-dev-box
+http://downloads.vagrantup.com/tags/v1.3.5
